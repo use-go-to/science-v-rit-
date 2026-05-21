@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche Récap — Science & Vérité (Plan Général)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --card: #14141a;
+    --card2: #1c1c24;
+    --border: #2a2a38;
+    --accent: #c8a96e;
+    --accent2: #7c9eff;
+    --accent3: #6ec882;
+    --text: #e8e6df;
+    --muted: #888899;
+    --danger: #dc5050;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.65;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .plan-banner {
+    background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  .plan-banner h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .plan-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .plan-step {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
+
+  .step-1 { background: rgba(220,80,80,0.15); color: var(--danger); border: 1px solid rgba(220,80,80,0.3); }
+  .step-2 { background: rgba(124,158,255,0.15); color: var(--accent2); border: 1px solid rgba(124,158,255,0.3); }
+  .step-3 { background: rgba(110,200,130,0.15); color: var(--accent3); border: 1px solid rgba(110,200,130,0.3); }
+
+  .arrow {
+    color: var(--muted);
+    font-size: 1.2rem;
+  }
+
+  .part-section {
+    margin-bottom: 32px;
+  }
+
+  .part-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .part-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .part-1 .part-number { background: rgba(220,80,80,0.2); color: var(--danger); }
+  .part-2 .part-number { background: rgba(124,158,255,0.2); color: var(--accent2); }
+  .part-3 .part-number { background: rgba(110,200,130,0.2); color: var(--accent3); }
+
+  .part-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .part-subtitle {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .concept-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .concept-card:hover {
+    border-color: var(--accent);
+  }
+
+  .concept-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .concept-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .part-1 .concept-icon { background: rgba(220,80,80,0.12); }
+  .part-2 .concept-icon { background: rgba(124,158,255,0.12); }
+  .part-3 .concept-icon { background: rgba(110,200,130,0.12); }
+
+  .concept-title {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .concept-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .concept-body {
+    color: #b0aaa0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .concept-body strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .kw {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .part-1 .kw { background: rgba(220,80,80,0.1); color: #e07070; border: 1px solid rgba(220,80,80,0.2); }
+  .part-2 .kw { background: rgba(124,158,255,0.1); color: #8aa8ff; border: 1px solid rgba(124,158,255,0.2); }
+  .part-3 .kw { background: rgba(110,200,130,0.1); color: #7ed898; border: 1px solid rgba(110,200,130,0.2); }
+
+  .quote-box {
+    background: var(--card2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #c5c3bc;
+    line-height: 1.5;
+  }
+
+  .quote-author {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.78rem;
+    margin-top: 6px;
+    display: block;
+  }
+
+  .philosopher-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  .ph-pascal { background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.25); }
+  .ph-nietzsche { background: rgba(220,80,80,0.12); color: #e07070; border: 1px solid rgba(220,80,80,0.25); }
+  .ph-freud { background: rgba(180,140,220,0.12); color: #c8a0e0; border: 1px solid rgba(180,140,220,0.25); }
+  .ph-platon { background: rgba(124,158,255,0.12); color: #8aa8ff; border: 1px solid rgba(124,158,255,0.25); }
+  .ph-pythagore { background: rgba(100,200,220,0.12); color: #70d0e0; border: 1px solid rgba(100,200,220,0.25); }
+  .ph-popper { background: rgba(110,200,130,0.12); color: #7ed898; border: 1px solid rgba(110,200,130,0.25); }
+  .ph-kuhn { background: rgba(200,160,100,0.12); color: #d8b070; border: 1px solid rgba(200,160,100,0.25); }
+  .ph-duhem { background: rgba(160,180,200,0.12); color: #a8c0d8; border: 1px solid rgba(160,180,200,0.25); }
+  .ph-russell { background: rgba(220,180,120,0.12); color: #e0c078; border: 1px solid rgba(220,180,120,0.25); }
+  .ph-geymonat { background: rgba(140,200,160,0.12); color: #90d8a8; border: 1px solid rgba(140,200,160,0.25); }
+  .ph-lorenz { background: rgba(180,200,140,0.12); color: #c0d888; border: 1px solid rgba(180,200,140,0.25); }
+
+  .philosophers-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .summary-box {
+    background: linear-gradient(135deg, rgba(200,169,110,0.08) 0%, rgba(124,158,255,0.08) 50%, rgba(110,200,130,0.08) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+
+  .summary-box h3 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .summary-item {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid var(--border);
+  }
+
+  .summary-item h4 {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .summary-item p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 6px;
+  }
+
+  .badge-essentiel { background: rgba(220,80,80,0.2); color: var(--danger); }
+  .badge-important { background: rgba(200,169,110,0.2); color: var(--accent); }
+  .badge-a-savoir { background: rgba(124,158,255,0.2); color: var(--accent2); }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    h1 { font-size: 1.5rem; }
+    .plan-flow { gap: 8px; }
+    .plan-step { font-size: 0.8rem; padding: 8px 12px; }
+    .arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Science & Vérité</h1>
+  <div class="subtitle">Plan général type bac 20/20 — Opinion → Raison → Science</div>
+
+  <div class="plan-banner">
+    <h2>🎯 La progression épistémologique</h2>
+    <div class="plan-flow">
+      <div class="plan-step step-1">I. L'OPINION</div>
+      <span class="arrow">→</span>
+      <div class="plan-step step-2">II. LA RAISON</div>
+      <span class="arrow">→</span>
+      <div class="plan-step step-3">III. LA SCIENCE</div>
+    </div>
+    <p style="margin-top:14px; color: var(--muted); font-size: 0.85rem;">
+      Comment le faux s'installe → Comment le vrai se construit → Comment le vrai reste ouvert
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════ PARTIE I ═══════════════════════════════════════ -->
+  <div class="part-section part-1">
+    <div class="part-header">
+      <div class="part-number">I</div>
+      <div>
+        <div class="part-title">L'OPINION : Comment le faux s'installe</div>
+        <div class="part-subtitle">Genèse des croyances, leurs causes psychologiques et sociales</div>
+      </div>
+    </div>
+
+    <!-- Concept 1 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🧠</div>
+        <div>
+          <div class="concept-title">L'opinion (doxa) <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Définition fondamentale</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        Jugement tenu pour <strong>vrai sans preuve suffisante</strong>. Elle peut être vraie par hasard, mais n'est pas <em>justifiée</em>. C'est l'obstacle principal à la connaissance.
+      </div>
+      <div class="keywords">
+        <span class="kw">Croyance</span>
+        <span class="kw">Passivité intellectuelle</span>
+        <span class="kw">Préjugé</span>
+        <span class="kw">Confort psychologique</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-pascal">Pascal</span>
+        <span class="philosopher-tag ph-nietzsche">Nietzsche</span>
+        <span class="philosopher-tag ph-freud">Freud</span>
+      </div>
+    </div>
+
+    <!-- Concept 2 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">💔</div>
+        <div>
+          <div class="concept-title">Le désir comme voie de l'opinion <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Cause psychologique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        Nous croyons ce qui nous <strong>plaît</strong> plutôt que ce qui est <strong>démontré</strong>. Les opinions entrent dans l'âme par deux portes : l'entendement (rare) et le désir (ordinaire, quoique "contre la nature").
+      </div>
+      <div class="keywords">
+        <span class="kw">Désir</span>
+        <span class="kw">Besoin</span>
+        <span class="kw">Pulsion</span>
+        <span class="kw">Confort</span>
+        <span class="kw">Appartenance</span>
+      </div>
+      <div class="quote-box">
+        « Il y a deux entrées par où les opinions sont reçues dans l'âme : l'entendement et le désir. La plus ordinaire, quoique contre la nature, est celle du désir. »
+        <span class="quote-author">— Pascal, <em>De l'art de persuader</em></span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-pascal">Pascal</span>
+      </div>
+    </div>
+
+    <!-- Concept 3 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🎭</div>
+        <div>
+          <div class="concept-title">La lâcheté intellectuelle <span class="badge badge-important">Important</span></div>
+          <div class="concept-label">Critique nietzschéenne</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        L'homme préfère les <strong>illusions rassurantes</strong> à la vérité dérangeante. C'est une forme de lâcheté : on choisit le confort de la croyance au prix de l'effort critique.
+      </div>
+      <div class="keywords">
+        <span class="kw">Illusion</span>
+        <span class="kw">Rassurance</span>
+        <span class="kw">Fuite</span>
+        <span class="kw">Démiurgie</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-nietzsche">Nietzsche</span>
+      </div>
+    </div>
+
+    <!-- Concept 4 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🔒</div>
+        <div>
+          <div class="concept-title">L'illusion affective <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Psychanalyse freudienne</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        L'illusion <strong>résiste</strong> même quand elle est démasquée car elle répond à des <strong>besoins fondamentaux</strong> (immortalité, amour parfait, jeunesse éternelle). Le désir de croire est plus fort que la raison.
+      </div>
+      <div class="keywords">
+        <span class="kw">Résistance</span>
+        <span class="kw">Besoin fondamental</span>
+        <span class="kw">Pulsion</span>
+        <span class="kw">Immortalité</span>
+        <span class="kw">Ténacité</span>
+      </div>
+      <div class="quote-box">
+        « L'illusion se distingue de l'erreur en ce qu'elle résiste même quand on la démasque. »
+        <span class="quote-author">— Freud, <em>L'avenir d'une illusion</em></span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-freud">Freud</span>
+      </div>
+    </div>
+
+    <!-- Concept 5 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">👥</div>
+        <div>
+          <div class="concept-title">L'opinion comme appartenance sociale <span class="badge badge-a-savoir">À savoir</span></div>
+          <div class="concept-label">Cause sociologique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        L'opinion vient des <strong>médias, de l'éducation, de la culture</strong> (origine génétique). Adopter l'opinion du groupe, c'est se rassurer sur son identité et sa place sociale.
+      </div>
+      <div class="keywords">
+        <span class="kw">Médias</span>
+        <span class="kw">Éducation</span>
+        <span class="kw">Culture</span>
+        <span class="kw">Conformisme</span>
+        <span class="kw">Identité</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-pascal">Pascal</span>
+        <span class="philosopher-tag ph-nietzsche">Nietzsche</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ PARTIE II ═══════════════════════════════════════ -->
+  <div class="part-section part-2">
+    <div class="part-header">
+      <div class="part-number">II</div>
+      <div>
+        <div class="part-title">LA RAISON : Comment le vrai se construit</div>
+        <div class="part-subtitle">Outils de la pensée critique, logique et démonstration</div>
+      </div>
+    </div>
+
+    <!-- Concept 1 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">⚖️</div>
+        <div>
+          <div class="concept-title">La vérité de cohérence <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Définition logique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        <strong>Accord logique</strong> de la pensée avec elle-même, sans contradiction interne. La vérité mathématique est un accord de la pensée avec elle-même, pas avec le réel.
+      </div>
+      <div class="keywords">
+        <span class="kw">Cohérence</span>
+        <span class="kw">Non-contradiction</span>
+        <span class="kw">Logique</span>
+        <span class="kw">Système</span>
+        <span class="kw">Abstrait</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-platon">Platon</span>
+        <span class="philosopher-tag ph-pythagore">Pythagore</span>
+      </div>
+    </div>
+
+    <!-- Concept 2 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">📐</div>
+        <div>
+          <div class="concept-title">La démonstration (déduction) <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Raisonnement nécessaire</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        Raisonnement qui prouve la vérité d'un énoncé de façon <strong>nécessaire</strong> à partir de prémisses vraies et de règles logiques valides. Un <strong>théorème</strong> est une vérité démontrée.
+      </div>
+      <div class="keywords">
+        <span class="kw">Syllogisme</span>
+        <span class="kw">Prémisse</span>
+        <span class="kw">Conclusion</span>
+        <span class="kw">Nécessité</span>
+        <span class="kw">Validité</span>
+        <span class="kw">Théorème</span>
+      </div>
+      <div class="quote-box" style="font-family: monospace; font-style: normal;">
+        <span style="color: var(--accent)">P1</span> : Tous les M sont P<br>
+        <span style="color: var(--accent)">P2</span> : Tous les S sont M<br>
+        <span style="color: var(--accent2)">C  </span> : Donc tous les S sont P<br><br>
+        <em style="color: var(--muted)">Si P1 et P2 sont vraies et le raisonnement valide → conclusion nécessairement vraie.</em>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-platon">Platon</span>
+        <span class="philosopher-tag ph-pythagore">Pythagore</span>
+      </div>
+    </div>
+
+    <!-- Concept 3 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🔺</div>
+        <div>
+          <div class="concept-title">Pythagore vs Mésopotamiens <span class="badge badge-important">Important</span></div>
+          <div class="concept-label">Induction vs Déduction</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        Les Mésopotamiens <strong>savaient</strong> la propriété par <strong>induction</strong> (mesures sur des cas particuliers). Pythagore l'a <strong>démontrée</strong> par <strong>déduction</strong> : valide pour <em>tous</em> les triangles rectangles possibles, sans exception.
+      </div>
+      <div class="keywords">
+        <span class="kw">Induction</span>
+        <span class="kw">Déduction</span>
+        <span class="kw">Universel</span>
+        <span class="kw">Particulier</span>
+        <span class="kw">Généralisation</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-pythagore">Pythagore</span>
+        <span class="philosopher-tag ph-platon">Platon</span>
+      </div>
+    </div>
+
+    <!-- Concept 4 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">❌</div>
+        <div>
+          <div class="concept-title">La contradiction comme révélateur <span class="badge badge-a-savoir">À savoir</span></div>
+          <div class="concept-label">Méthode dialectique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        La raison élimine les <strong>incohérences logiques</strong>. Ex : Calliclès (Platon, <em>Gorgias</em>) dit que les forts sont dominés — contradiction ! Si dominés, ils ne sont plus forts.
+      </div>
+      <div class="keywords">
+        <span class="kw">Contradiction</span>
+        <span class="kw">Incohérence</span>
+        <span class="kw">Dialectique</span>
+        <span class="kw">Réfutation</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-platon">Platon</span>
+      </div>
+    </div>
+
+    <!-- Concept 5 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🎯</div>
+        <div>
+          <div class="concept-title">Limite de la raison <span class="badge badge-important">Important</span></div>
+          <div class="concept-label">L'abstraction</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        La raison opère sur des objets <strong>abstraits</strong> (le triangle n'a ni couleur ni matière). La vérité mathématique est un accord de la pensée avec elle-même, pas avec le réel physique.
+      </div>
+      <div class="keywords">
+        <span class="kw">Abstraction</span>
+        <span class="kw">Idéal</span>
+        <span class="kw">Concret</span>
+        <span class="kw">Formel</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-platon">Platon</span>
+        <span class="philosopher-tag ph-pythagore">Pythagore</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ PARTIE III ═══════════════════════════════════════ -->
+  <div class="part-section part-3">
+    <div class="part-header">
+      <div class="part-number">III</div>
+      <div>
+        <div class="part-title">LA SCIENCE : Comment le vrai reste ouvert</div>
+        <div class="part-subtitle">Vérité provisoire, réfutable, féconde — ni dogme ni illusion</div>
+      </div>
+    </div>
+
+    <!-- Concept 1 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🧪</div>
+        <div>
+          <div class="concept-title">La vérité d'adéquation <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Définition empirique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        <strong>Conformité de la pensée à la réalité</strong> : un énoncé est vrai s'il correspond à ce qui est réellement le cas. Ex : "il pleut" est vrai s'il pleut vraiment.
+      </div>
+      <div class="keywords">
+        <span class="kw">Adéquation</span>
+        <span class="kw">Correspondance</span>
+        <span class="kw">Réalité</span>
+        <span class="kw">Fait</span>
+        <span class="kw">Vérification</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-duhem">Duhem</span>
+        <span class="philosopher-tag ph-russell">Russell</span>
+      </div>
+    </div>
+
+    <!-- Concept 2 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">⚡</div>
+        <div>
+          <div class="concept-title">L'accord avec l'expérience (Duhem) <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Critère de vérité physique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        L'accord avec l'expérience est le <strong>seul critère de vérité</strong> d'une théorie physique. Une théorie est vraie si elle représente de façon satisfaisante un ensemble de lois expérimentales.
+      </div>
+      <div class="keywords">
+        <span class="kw">Expérience</span>
+        <span class="kw">Vérification</span>
+        <span class="kw">Lois</span>
+        <span class="kw">Représentation</span>
+        <span class="kw">Satisfaction</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-duhem">Duhem</span>
+      </div>
+    </div>
+
+    <!-- Concept 3 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🔨</div>
+        <div>
+          <div class="concept-title">La falsifiabilité (Popper) <span class="badge badge-essentiel">Essentiel</span></div>
+          <div class="concept-label">Critère de scientificité</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        Une théorie scientifique doit pouvoir être <strong>réfutée</strong> par l'expérience. Ce n'est pas une faiblesse : c'est la <strong>marque du caractère scientifique</strong>. Une théorie irréfutable n'est pas scientifique.
+      </div>
+      <div class="keywords">
+        <span class="kw">Falsification</span>
+        <span class="kw">Réfutation</span>
+        <span class="kw">Testabilité</span>
+        <span class="kw">Dogme</span>
+        <span class="kw">Conjecture</span>
+      </div>
+      <div class="quote-box">
+        « On peut réfuter une théorie, mais jamais la prouver définitivement vraie. »
+        <span class="quote-author">— Popper, <em>La logique de la découverte scientifique</em></span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-popper">Popper</span>
+      </div>
+    </div>
+
+    <!-- Concept 4 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🔄</div>
+        <div>
+          <div class="concept-title">La révolution scientifique (Kuhn) <span class="badge badge-important">Important</span></div>
+          <div class="concept-label">Changement de paradigme</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        Moment où un <strong>paradigme</strong> (cadre de référence scientifique) est renversé par un nouveau, incompatible avec l'ancien. La science progresse sans nécessairement se rapprocher d'une vérité ultime.
+      </div>
+      <div class="keywords">
+        <span class="kw">Paradigme</span>
+        <span class="kw">Révolution</span>
+        <span class="kw">Incommensurabilité</span>
+        <span class="kw">Normal</span>
+        <span class="kw">Crise</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-kuhn">Kuhn</span>
+      </div>
+    </div>
+
+    <!-- Concept 5 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🌱</div>
+        <div>
+          <div class="concept-title">La vérité féconde (Geymonat) <span class="badge badge-a-savoir">À savoir</span></div>
+          <div class="concept-label">Critère pratique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        La vérité scientifique est <strong>féconde</strong> et dialectique — elle accepte d'être rectifiée. Elle se mesure à sa capacité à engendrer de nouvelles découvertes et à résoudre des problèmes.
+      </div>
+      <div class="keywords">
+        <span class="kw">Fécondité</span>
+        <span class="kw">Dialectique</span>
+        <span class="kw">Rectification</span>
+        <span class="kw">Progrès</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-geymonat">Geymonat</span>
+      </div>
+    </div>
+
+    <!-- Concept 6 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🔧</div>
+        <div>
+          <div class="concept-title">La vérité technique (Russell) <span class="badge badge-a-savoir">À savoir</span></div>
+          <div class="concept-label">Critère utilitaire</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        La vérité scientifique est <strong>technique</strong> et provisoire — plus une théorie est utile (prévisions exactes, applications pratiques), plus elle est "vraie".
+      </div>
+      <div class="keywords">
+        <span class="kw">Utilité</span>
+        <span class="kw">Prévision</span>
+        <span class="kw">Provisoire</span>
+        <span class="kw">Instrumental</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-russell">Russell</span>
+      </div>
+    </div>
+
+    <!-- Concept 7 -->
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon">🌍</div>
+        <div>
+          <div class="concept-title">L'universalité de la vérité (Lorenz) <span class="badge badge-important">Important</span></div>
+          <div class="concept-label">Réalisme scientifique</div>
+        </div>
+      </div>
+      <div class="concept-body">
+        La vérité scientifique est <strong>universelle</strong> car le cerveau humain la <strong>découvre</strong>, ne la fabrique pas. Elle est abstraite d'une réalité indépendante de l'esprit.
+      </div>
+      <div class="keywords">
+        <span class="kw">Universalité</span>
+        <span class="kw">Découverte</span>
+        <span class="kw">Réalité indépendante</span>
+        <span class="kw">Objectivité</span>
+      </div>
+      <div class="philosophers-row">
+        <span class="philosopher-tag ph-lorenz">Lorenz</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ RÉCAPITULATIF ═══════════════════════════════════════ -->
+  <div class="summary-box">
+    <h3>📋 Tableau de bord — Philosophes & Idées-clés</h3>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <h4>🧠 Pascal</h4>
+        <p>Deux entrées de l'âme : entendement (rare) vs désir (ordinaire). L'opinion entre par le désir, contre la nature.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🎭 Nietzsche</h4>
+        <p>Lâcheté intellectuelle : on préfère les illusions rassurantes à la vérité dérangeante.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🔒 Freud</h4>
+        <p>Illusions affectives tenaces car répondant à des besoins fondamentaux (immortalité, amour parfait).</p>
+      </div>
+      <div class="summary-item">
+        <h4>⚖️ Platon</h4>
+        <p>Méthode dialectique : la raison élimine les contradictions (Calliclès). Démonstration = nécessité.</p>
+      </div>
+      <div class="summary-item">
+        <h4>📐 Pythagore</h4>
+        <p>Démonstration déductive supérieure à l'induction : valide pour tous les cas, pas seulement observés.</p>
+      </div>
+      <div class="summary-item">
+        <h4>⚡ Duhem</h4>
+        <p>L'accord avec l'expérience est le seul critère de vérité d'une théorie physique.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🔨 Popper</h4>
+        <p>Falsifiabilité = marque de la scientificité. On peut réfuter, jamais prouver définitivement.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🔄 Kuhn</h4>
+        <p>Révolutions scientifiques : paradigmes successifs, pas de convergence vers une vérité ultime.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🌱 Geymonat</h4>
+        <p>Vérité féconde et dialectique : elle progresse par rectifications successives.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🔧 Russell</h4>
+        <p>Vérité technique et provisoire : mesurée à l'utilité et aux prévisions exactes.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🌍 Lorenz</h4>
+        <p>Universalité : le cerveau découvre des structures réelles, ne les invente pas.</p>
+      </div>
+      <div class="summary-item">
+        <h4>🎯 Idée maîtresse</h4>
+        <p>Nietzsche + Freud convergent : l'homme préfère croire ce qui l'arrange. La science surmonte ce biais, mais sa vérité reste provisoire.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 30px; color: var(--muted); font-size: 0.8rem; padding-bottom: 20px;">
+    Fiche récap générée pour le thème Science & Vérité — Philosophie Bac
+  </div>
+
+</div>
+
+</body>
+</html>
